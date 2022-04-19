@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+cd frontend && \
+yarn build && \
+cd .. && \
+docker buildx build -f Dockerfile --push -t voidxnull/zeropool-substrate-faucet .

@@ -1,0 +1,18 @@
+{
+  "name": "zeropool-substrate-faucet-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Dmitry Vdovin <voidxnull@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@polkadot/api": "^8.1.1",
+    "@polkadot/keyring": "^9.0.1",
+    "@polkadot/util-crypto": "^9.0.1",
+    "fastify": "^3.28.0",
+    "fastify-cors": "^6.0.3",
+    "fastify-static": "^4.6.1"
+  }
+}

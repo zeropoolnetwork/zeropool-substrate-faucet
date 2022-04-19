@@ -1,0 +1,32 @@
+<!-- html5 file -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Faucet</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./env.js"></script>
+</head>
+
+<body>
+  <main class="container">
+    <div class="main-form">
+      <h1>ZeroPool Substrate Faucet</h1>
+      <form id="claim-form" action="/api/claim" method="post">
+        <div class="grid">
+          <input id="address" type="text" name="address" placeholder="Address">
+          <input id="submit" type="submit" value="Claim">
+        </div>
+      </form>
+      <div id="balance-block" class="grid hidden">
+        <span>Balance:</span>
+        <span id="balance"></span>
+      </div>
+    </div>
+  </main>
+
+  <script src="./index.js" type="module"></script>
+</body>
+
+</html>

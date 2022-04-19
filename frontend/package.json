@@ -1,0 +1,26 @@
+{
+  "name": "zeropool-substrate-faucet-fronend",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Dmitry Vdovin <voidxnull@gmail.com>",
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build && cp src/env.js dist/env.js",
+    "prebuild": "rm -rf dist/*"
+  },
+  "parcelIgnore": [
+    "env.js"
+  ],
+  "devDependencies": {
+    "@parcel/compressor-gzip": "^2.4.1",
+    "parcel": "^2.4.1",
+    "parcel-resolver-ignore": "^2.0.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "@picocss/pico": "^1.5.0",
+    "@polkadot/api": "^8.1.1"
+  }
+}
