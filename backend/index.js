@@ -3,7 +3,7 @@ const fastify = require('fastify')({ logger: true });
 
 fastify.register(require('fastify-cors'));
 
-fastify.get('/api/claim', handlers.claim);
+fastify.post('/api/claim', handlers.claim);
 
 const start = async () => {
   try {

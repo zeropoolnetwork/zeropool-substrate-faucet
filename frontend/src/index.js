@@ -1,12 +1,12 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
 
-const wsProvider = new WsProvider(window.RPC_URL);
+const wsProvider = new WsProvider(window.WS_URL);
 const api = new ApiPromise({ provider: wsProvider });
 
 async function getBalance(address) {
   await api.isReady;
   const { data: balance } = await api.query.system.account(address);
-  return balance.toString();
+  return balance.free.toString();
 }
 
 const balanceElement = document.getElementById('balance');
@@ -26,11 +26,9 @@ function hideBalanceBlock() {
 const addressInput = document.getElementById('address');
 addressInput.addEventListener('input', function (ev) {
   const address = ev.target.value;
-  try {
-    displayBalance(address);
-  } catch (_e) {
-    hideBalanceBlock();
-  }
+
+  displayBalance(address)
+    .catch(err => hideBalanceBlock());
 });
 
 // Submit form
@@ -42,7 +40,11 @@ form.addEventListener('submit', (e) => {
 
   fetch(form.action, {
     method: form.method,
-    body: new FormData(form),
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(Object.fromEntries(new FormData(form))),
   }).then(() => {
     displayBalance(addressInput.value);
   }).finally(() => {

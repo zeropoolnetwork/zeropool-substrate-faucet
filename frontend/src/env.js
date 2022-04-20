@@ -1,1 +1,1 @@
-window.RPC_URL = '$RPC_URL';
+window.WS_URL = '$WS_URL';

@@ -3,11 +3,13 @@ const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { Keyring } = require('@polkadot/keyring');
 const { cryptoWaitReady } = require('@polkadot/util-crypto');
 
-const { PRIVATE_KEY, RPC_URL } = process.env;
+const { PRIVATE_KEY, WS_URL } = process.env;
 
-exports.claim = async (fastify, request, reply) => {
+exports.claim = async (request, reply) => {
   await cryptoWaitReady();
-  const wsProvider = new WsProvider(RPC_URL);
+
+  const address = request.body.address;
+  const wsProvider = new WsProvider(WS_URL);
   const api = await ApiPromise.create({ provider: wsProvider });
 
   const keyring = new Keyring({ type: 'sr25519' });
@@ -19,7 +21,7 @@ exports.claim = async (fastify, request, reply) => {
 
     await api.tx.sudo
       .sudo(
-        api.tx.balances.setBalance(address, '1000000000', '0')
+        api.tx.balances.setBalance(address, '1000000000000000000', '0')
       )
       .signAndSend(alice, { nonce }, ({ events = [], status }) => {
         if (status.isFinalized) {
@@ -30,4 +32,8 @@ exports.claim = async (fastify, request, reply) => {
         }
       });
   });
+
+  reply
+    .code(200)
+    .send();
 }
