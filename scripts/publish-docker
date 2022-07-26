@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
+USERNAME=voidxnull
+IMAGE=zeropool-substrate-faucet
+
 cd frontend && \
-yarn build && \
+yarn && yarn build && \
 cd .. && \
-docker buildx build -f Dockerfile --push -t voidxnull/zeropool-substrate-faucet .
+docker build -f Dockerfile -t $USERNAME/$IMAGE:latest . && \
+docker push $USERNAME/$IMAGE:latest
