@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 
+PARENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )"
+
 USERNAME=voidxnull
 IMAGE=zeropool-substrate-faucet
+VERSION=$(cat "$PARENT_DIR"/package.json | jq -r .version)
 
 cd frontend && \
 yarn && yarn build && \
 cd .. && \
 docker build -f Dockerfile -t $USERNAME/$IMAGE:latest . && \
-docker push $USERNAME/$IMAGE:latest
+docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$VERSION && \
+docker push $USERNAME/$IMAGE:latest && \
+docker push $USERNAME/$IMAGE:$VERSION

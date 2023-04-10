@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 printenv
-original='env.js'
+original='/usr/share/nginx/html/env.js'
 tmp=$(mktemp)
 
 echo "Original ${original}"
