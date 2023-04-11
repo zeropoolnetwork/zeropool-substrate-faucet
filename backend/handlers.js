@@ -21,7 +21,7 @@ exports.claim = async (request, reply) => {
 
     await api.tx.sudo
       .sudo(
-        api.tx.balances.setBalance(address, '1000000000000000000', '0')
+        api.tx.balances.setBalance(address, '100000000000000000000', '0')
       )
       .signAndSend(alice, { nonce }, ({ events = [], status }) => {
         if (status.isFinalized) {
